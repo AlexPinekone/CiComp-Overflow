@@ -1,0 +1,25 @@
+{
+	"recommendations": [
+		"formulahendry.auto-close-tag",
+		"formulahendry.auto-rename-tag",
+		"aaron-bond.better-comments",
+		"streetsidesoftware.code-spell-checker",
+		"naumovs.color-highlight",
+		"pranaygp.vscode-css-peek",
+		"pucelle.vscode-css-navigation",
+		"ms-azuretools.vscode-docker",
+		"usernamehw.errorlens",
+		"dbaeumer.vscode-eslint",
+		"zh9528.file-size",
+		"seyyedkhandon.fpack",
+		"seyyedkhandon.gpack",
+		"mhutchie.git-graph",
+		"github.vscode-pull-request-github",
+		"wix.vscode-import-cost",
+		"christian-kohler.path-intellisense",
+		"bradlc.vscode-tailwindcss",
+		"zarifprogrammer.tailwind-snippets",
+		"pflannery.vscode-versionlens",
+		"esbenp.prettier-vscode"
+	]
+}

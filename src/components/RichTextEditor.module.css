@@ -1,0 +1,34 @@
+.editor * {
+	width: 100%;
+	padding: 32px;
+	height: 100%;
+}
+
+.editor img {
+	min-height: 32rem;
+	max-height: 32rem;
+	min-width: 32rem;
+	max-width: 100%;
+	object-fit: contain;
+	margin: 0 auto;
+}
+
+.editor > div {
+	height: clamp(32rem, 32rem, 32rem);
+	overflow-x: auto;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-flow: column nowrap;
+	gap: 1px;
+	outline: none;
+}
+
+.editor > div > * {
+	padding: 0;
+	height: fit-content;
+}
+
+.editor {
+	border: 1px solid rgba(0, 0, 0, 0.089);
+}

@@ -1,0 +1,32 @@
+{
+	"name": "Next.js & PostgreSQL Dev",
+	"dockerComposeFile": ["../docker-compose-dev.yaml"],
+	"service": "next-app",
+	"remoteUser": "node",
+	"workspaceFolder": "/app",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"esbenp.prettier-vscode",
+				"dbaeumer.vscode-eslint",
+				"formulahendry.auto-close-tag",
+				"formulahendry.auto-rename-tag",
+				"aaron-bond.better-comments",
+				"kennylong.kubernetes-yaml-formatter",
+				"usernamehw.errorlens",
+				"waderyan.gitblame",
+				"mhutchie.git-graph",
+				"GitHub.vscode-pull-request-github",
+				"oderwat.indent-rainbow",
+				"christian-kohler.path-intellisense",
+				"YoavBls.pretty-ts-errors",
+				"bradlc.vscode-tailwindcss"
+			],
+			"settings": {
+				"terminal.integrated.shell.linux": "/bin/bash"
+			}
+		}
+	},
+	"postCreateCommand": "sudo chown -R node:node /app && npm install"
+}

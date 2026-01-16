@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:22
+
+# Establece el directorio de trabajo
+WORKDIR /app
+
+# RUN mkdir -p /app && chown -R node:node /app
+
+# Instala dependencias sin root (usa el usuario por defecto si ya es no-root)
+USER node
+
+# Copia los archivos de dependencias
+COPY package*.json ./
+
+# RUN npm install
+# Copia el resto del código fuente
+COPY . .
+
+# Expone el puerto por defecto de Next.js
+EXPOSE 3000

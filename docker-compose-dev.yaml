@@ -1,0 +1,89 @@
+# Docker Compose para un entorno de desarrollo con Next.js y PostgreSQL
+
+services:
+    # Servicio de la aplicación Next.js
+    next-app:
+        user: 'node'
+        env_file:
+            - .env
+        environment:
+            - CHOKIDAR_USEPOLLING=true
+            - CHOKIDAR_INTERVAL=1000
+            - WATCHPACK_POLLING=true
+            - WATCHPACK_POLLING_INTERVAL=1000
+            - DATABASE_URI=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+        # Construye la imagen usando el Dockerfile en el directorio actual.
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+            restart: unless-stopped
+        # Monta el directorio del proyecto como un volumen.
+        # Esto permite que los cambios que hagas en tu código local se reflejen en tiempo real en el contenedor.
+        volumes:
+            - .:/app
+            - /app/node_modules
+
+        # Exponemos el puerto de la app.
+        ports:
+            - '3000:3000'
+
+        # Establecemos una dependencia en la base de datos para asegurar que se inicie primero.
+        depends_on:
+            - db
+            - migrate
+
+        # Mantén el contenedor en ejecución para permitir una conexión interactiva.
+        # Esto es crucial para un Dev Container.
+        stdin_open: true
+        tty: true
+
+    # Servicio de la base de datos PostgreSQL
+    db:
+        image: postgres:14-alpine
+        # Toma las variables de entorno para la base de datos desde tu archivo .env.
+        env_file:
+            - .env
+        ports:
+            - '5432:5432'
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        restart: unless-stopped
+    migrate:
+        image: postgres:14-alpine # este ya trae psql
+        depends_on:
+            - db
+        volumes:
+            - ./scripts:/app/scripts
+            - ./src/database/migrations:/app/src/database/migrations
+            - ./.env:/app/.env:ro
+        working_dir: /app
+        entrypoint:
+            ['sh', '-c', 'apk add --no-cache bash && ./scripts/migrate/up.sh']
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: ${POSTGRES_DB}
+            POSTGRES_HOST: db
+            POSTGRES_PORT: 5432
+    redis:
+        image: redis:8.2.2-alpine
+        ports:
+            - '6379:6379'
+        environment:
+            REDIS_PASSWORD: ${REDIS_PASSWORD}
+        command: ['sh', '-c', 'redis-server --requirepass "$REDIS_PASSWORD"']
+        restart: unless-stopped
+
+    proxy:
+        image: nginx:stable-alpine3.21-perl
+        ports:
+            - '8080:80'
+        volumes:
+            - ./default.conf:/etc/nginx/conf.d/default.conf:ro
+        depends_on:
+            - next-app
+        restart: unless-stopped
+
+# Define el volumen para la persistencia de los datos de la base de datos.
+volumes:
+    postgres_data:
