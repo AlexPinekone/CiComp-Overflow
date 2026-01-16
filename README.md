@@ -87,5 +87,16 @@ Para información detallada sobre cómo ejecutar y configurar las pruebas del pr
 **Equipo CiComp Overflow**  
 📧 Correo general: [cicompoverflow@gmail.com](mailto:cicompoverflow@gmail.com)  
 👨‍💻 Líder del equipo de desarrollo: [edwinsaucedomx@gmail.com](mailto:edwinsaucedomx@gmail.com)
+- Edwin Donaldo Saucedo Vázquez
+  [GitHub](https://github.com/EdwinSaucedoMX)
+- Manuel Cortez 
+  [GitHub](https://github.com/cortezxm)
+- Ricardo
+  [GitHub](https://github.com/rica-2000)
+- 0jeda Gutiérrez
+  [GitHub](https://github.com/0jeda)
+- AlexPinekone
+  [GitHub](https://github.com/AlexPinekone)
+
 
 Enlace del Proyecto: https://github.com/Ci-Comp-Overflow/ci-comp-overflow
